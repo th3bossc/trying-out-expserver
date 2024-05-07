@@ -1,8 +1,0 @@
-{
-    "files.associations": {
-        "*.spl": "spl-nitc",
-        "xps.h": "c",
-        "xps_utils.h": "c",
-        "netdb.h": "c"
-    }
-}
