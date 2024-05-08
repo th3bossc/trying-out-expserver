@@ -18,5 +18,5 @@ echo "DESTINATION:  $DESTINATION"
 
 
 mkdir -p "$DESTINATION/src"
-cp -r "$SOURCE"/src "$DESTINATION"
+cp -r "$SOURCE" "$DESTINATION"
 
