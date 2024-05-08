@@ -64,21 +64,23 @@ void connection_read_handler(void* ptr) {
     char buff[DEFAULT_BUFFER_SIZE];
     long read_n = recv(connection->sock_fd, buff, sizeof(buff), 0);
 
+
     if (read_n < 0) {
-        logger(LOG_ERROR, "xps_connection_read_handler()", "recv() failed");
+        logger(LOG_ERROR, "connection_read_handler()", "recv() failed");
         perror("Error message");
         xps_connection_destroy(connection);
         return;
     }
 
     if (read_n == 0) {
-        logger(LOG_INFO, "xps_connection_read_handler()", "peer closed connection");
+        logger(LOG_INFO, "connection_read_handler()", "peer closed connection");
         xps_connection_destroy(connection);
         return;
     }
 
     buff[read_n] = 0;
 
+    logger(LOG_DEBUG, "connection_read_handler()", "received text: %s", buff);
     reverse_string(buff, read_n);
 
     long bytes_written = 0;
@@ -87,7 +89,7 @@ void connection_read_handler(void* ptr) {
     while(bytes_written < message_len) {
         long write_n = send(connection->sock_fd, buff + bytes_written, message_len - bytes_written, 0);
         if (write_n < 0) {
-            logger(LOG_ERROR, "xps_connection_read_handler()", "send() failed");
+            logger(LOG_ERROR, "connection_read_handler()", "send() failed");
             perror("Error message");
             xps_connection_destroy(connection);
             return;
