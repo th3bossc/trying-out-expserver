@@ -16,5 +16,7 @@ fi
 echo "SOURCE:   $SOURCE"
 echo "DESTINATION:  $DESTINATION"
 
-cp -r "$SOURCE"/* "$DESTINATION"
+
+mkdir -p "$DESTINATION/src"
+cp -r "$SOURCE"/src "$DESTINATION"
 
